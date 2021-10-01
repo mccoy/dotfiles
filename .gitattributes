@@ -1,0 +1,4 @@
+# Set using
+# Set config path using "git config --global core.attributesfile <path>"
+*.py diff=python
+*.md diff=markdown

@@ -1,0 +1,16 @@
+# The git per-user configuration file.
+#
+# The user.email and user.signingkey may be system-specific so set using the
+# "git config --global <attr> <value>" cli command instead of hard-coding here.
+[user]
+	name = Jim McCoy
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	mylog = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[pull]
+	rebase = false

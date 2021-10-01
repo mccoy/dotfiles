@@ -1,0 +1,14 @@
+# Allow up/down autocompletion of commands from bash history.
+# From: coderwall.com/p/oqtj8w
+# See http://www.reddit.com/r/commandline/comments/kbeoe/you_can_make_readline_and_bash_much_more_user/
+# See http://news.ycombinator.com/item?id=2984231
+"\C-p":history-search-backward
+"\C-n":history-search-forward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-prefix-display-length 2
+
+# Uncomment to enable vi-like command line editing mode.
+# set editing-mode vi
