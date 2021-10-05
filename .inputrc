@@ -4,8 +4,8 @@
 # See http://news.ycombinator.com/item?id=2984231
 "\C-p":history-search-backward
 "\C-n":history-search-forward
-"\e[A": history-search-backward
-"\e[B": history-search-forward
+"\e[A":history-search-backward
+"\e[B":history-search-forward
 set show-all-if-ambiguous on
 set completion-ignore-case on
 set completion-prefix-display-length 2
