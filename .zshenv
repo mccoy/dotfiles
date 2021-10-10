@@ -3,7 +3,7 @@
 # Every zsh instance (interactive and non-interactive) runs this
 
 # Set basic PATH
-export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
+export PATH=/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$HOME/bin:$PATH
 
 # Set ssh-agent
 ssh-add -l >/dev/null

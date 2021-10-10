@@ -8,4 +8,4 @@ alias rgrep="grep -R"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias lsd="ls -l | grep ^d"
-
+alias update_all="brew update; brew upgrade; brew cleanup -s; brew doctor; brew missing; brew cu -a; echo 'Outdated packages to update using mas upgrade:'; mas outdated"

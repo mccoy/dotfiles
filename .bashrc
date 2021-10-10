@@ -67,9 +67,9 @@ unset pathappend pathremove pathprepend
 [[ ${-#*i} != ${-} ]] || return
 
 
-# Aliases
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
-[ -f ~/.bash_local_aliases ] && source ~/.bash_local_aliases
+# Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.aliases_local ] && source ~/.aliases_local
 
 # vagrant alias
 #alias setvopts="export VOPTS=`vagrant ssh-config | grep -v '^Host ' | awk -v ORS=' ' 'NF{print \"-o \" $1 \"=\" $2}'`"
