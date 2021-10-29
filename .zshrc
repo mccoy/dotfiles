@@ -33,8 +33,11 @@ export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 # Enable plugins.
 plugins=(git brew history kubectl history-substring-search)
 
-# Custom $PATH with extra locations.
-export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:$PATH
+# Update path
+typeset -U path			# make path entries unique
+path+=(~/bin ~/go/bin)		# append paths
+#path=('~/bin' $path)		# prepend path element
+export PATH
 
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
