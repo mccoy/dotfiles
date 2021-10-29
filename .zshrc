@@ -31,7 +31,7 @@ key=(
 export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 
 # Enable plugins.
-plugins=(git brew history kubectl history-substring-search)
+plugins=(git brew history kubectl history-substring-search pyenv vscode)
 
 # Update path
 typeset -U path			# make path entries unique
@@ -48,20 +48,7 @@ then
   source ~/.aliases
 fi
 
-# Set architecture-specific brew share path.
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    share_path="/usr/local/share"
-elif [ "${arch_name}" = "arm64" ]; then
-    share_path="/opt/homebrew/share"
-else
-    echo "Unknown architecture: ${arch_name}"
-fi
-
-# Allow history search via up/down keys.
-#source ${share_path}/zsh-history-substring-search/zsh-history-substring-search.zsh
-#bindkey "^[[A" history-search-forward
-#bindkey "^[[B" history-search-backward
+# History
 bindkey "$key[Up]" history-begining-search-forward
 bindkey "$key[Down]" history-beginning-search-backward
 
