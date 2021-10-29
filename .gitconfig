@@ -14,3 +14,5 @@
 	process = git-lfs filter-process
 [pull]
 	rebase = false
+[core]
+	excludesfile = /Users/mccoy/.gitignore_global

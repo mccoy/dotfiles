@@ -12,6 +12,21 @@ export CLICOLOR_FORCE=1
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
 
+# Define special keys
+key=(
+    BackSpace  "${terminfo[kbs]}"
+    Home       "${terminfo[khome]}"
+    End        "${terminfo[kend]}"
+    Insert     "${terminfo[kich1]}"
+    Delete     "${terminfo[kdch1]}"
+    Up         "${terminfo[kcuu1]}"
+    Down       "${terminfo[kcud1]}"
+    Left       "${terminfo[kcub1]}"
+    Right      "${terminfo[kcuf1]}"
+    PageUp     "${terminfo[kpp]}"
+    PageDown   "${terminfo[knp]}"
+)
+
 # Nicer prompt.
 export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
 
@@ -42,8 +57,10 @@ fi
 
 # Allow history search via up/down keys.
 #source ${share_path}/zsh-history-substring-search/zsh-history-substring-search.zsh
-bindkey "^[[A" history-search-forward
-bindkey "^[[B" history-search-backward
+#bindkey "^[[A" history-search-forward
+#bindkey "^[[B" history-search-backward
+bindkey "$key[Up]" history-begining-search-forward
+bindkey "$key[Down]" history-beginning-search-backward
 
 # Git aliases.
 alias gs='git status'
