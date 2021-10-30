@@ -48,7 +48,16 @@ then
   source ~/.aliases
 fi
 
-# History
+# Set eternal history
+export HISTFILE=~/.zsh_history    # set our history file location
+export HISTFILESIZE=1000000000    # max is max of a longint, a billion is good enough
+export HISTSIZE=1000000000        # max is max of a longint, a billion is good enough
+setopt inc_append_history         # immediately write to history file
+setopt hist_ignore_dups           # ignore duplicated commands history list
+setopt hist_ignore_space          # ignore commands that start with space
+setopt hist_verify                # show command with history expansion to user before running it
+setopt hist_find_no_dups          # skip sequential dupes when searching through history
+# History search keys
 bindkey "$key[Up]" history-begining-search-forward
 bindkey "$key[Down]" history-beginning-search-backward
 
