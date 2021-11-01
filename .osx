@@ -19,6 +19,9 @@
 #
 # @see: http://secrets.blacktree.com/?showapp=com.apple.finder
 # @see: https://github.com/herrbischoff/awesome-macos-command-line
+# @see: https://github.com/justjake/Dotfiles/blob/new/mac-setup.sh
+# @see: https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+# @see: https://github.com/bkuhlmann/osx/blob/master/scripts/defaults.sh
 #
 # Original author: Jeff Geerling
 # Additional personalization: Jim McCoy
@@ -160,6 +163,12 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `Flwv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
+# Expand “General”, “Open with”, and “Sharing & Permissions” File Info panes
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+  General -bool true \
+  OpenWith -bool true \
+  Privileges -bool true
+
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
@@ -216,6 +225,16 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+# Enable debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+###############################################################################
+# Printer                                                                     #
+###############################################################################
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
@@ -256,6 +275,22 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 
 # Disable continuous spell checking
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
+###############################################################################
+# TextEdit                                                                    #
+###############################################################################
+
+# Open and save files using UTF-8 encoding
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+###############################################################################
+# Disk Utility                                                                #
+###############################################################################
+
+# Enable debug menu
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true
 
 ###############################################################################
 # Kill/restart affected applications                                          #

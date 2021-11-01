@@ -43,10 +43,14 @@ export PATH
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
 # Include alias file (if present) containing aliases for ssh, etc.
-if [ -f ~/.aliases ]
-then
-  source ~/.aliases
-fi
+#if [ -f ~/.aliases ]
+#then
+#  source ~/.aliases
+#fi
+
+# Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.aliases_local ] && source ~/.aliases_local
 
 # Set eternal history
 export HISTFILE=~/.zsh_history    # set our history file location
@@ -57,9 +61,30 @@ setopt hist_ignore_dups           # ignore duplicated commands history list
 setopt hist_ignore_space          # ignore commands that start with space
 setopt hist_verify                # show command with history expansion to user before running it
 setopt hist_find_no_dups          # skip sequential dupes when searching through history
+setopt hist_no_store              # do not store history command
 # History search keys
 bindkey "$key[Up]" history-begining-search-forward
 bindkey "$key[Down]" history-beginning-search-backward
+
+# GNUPG
+#
+export GPG_TTY=$(tty)
+export GNUPGHOME=~/.gnupg
+
+set term=xterm-256color
+export TERM=xterm-256color
+export LESS="-erX"
+export BLOCKSIZE="1024"
+export LC_ALL="en_US.UTF-8"
+export RSYNC_RSH=/usr/bin/ssh
+
+# Umask bits.
+if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
+  umask 002
+else
+  umask 022
+fi
+
 
 # Git aliases.
 alias gs='git status'
@@ -122,8 +147,10 @@ knownrm() {
  fi
 }
 
-# Allow Composer to use almost as much RAM as Chrome.
-export COMPOSER_MEMORY_LIMIT=-1
+# Cheat sheet shortcut
+function cheat() {
+    curl cht.sh/$1
+}
 
 # Ask for confirmation when 'prod' is in a command string.
 #prod_command_trap () {
