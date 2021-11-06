@@ -9,3 +9,116 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias lsd="ls -l | grep ^d"
 alias update_all="brew update; brew upgrade; brew cleanup -s; brew doctor; brew missing; brew cu -a; echo 'Outdated packages to update using mas upgrade:'; mas outdated"
+
+# Git aliases.
+alias gs='git status'
+alias gc='git commit'
+alias gp='git pull --rebase'
+alias gcam='git commit -am'
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+
+# Functions
+#
+
+# Dump relevant data about a specific pid
+proc_debug() {
+  lsof -Pnp $1 > /tmp/lsof-$1.out
+  strace -fs2048 -p $1 -oi /tm/strage-$1.out
+}
+
+# Git upstream branch syncer.
+# Usage: gsync master (checks out master, pull upstream, push origin).
+function gsync() {
+ if [[ ! "$1" ]] ; then
+     echo "You must supply a branch."
+     return 0
+ fi
+
+ BRANCHES=$(git branch --list $1)
+ if [ ! "$BRANCHES" ] ; then
+    echo "Branch $1 does not exist."
+    return 0
+ fi
+
+ git checkout "$1" && \
+ git pull upstream "$1" && \
+ git push origin "$1"
+}
+
+# On OS X this will cd to the top-most Finder window
+cdfinder() {
+  cd "$( /usr/bin/osascript <<"    EOT"
+    tell application "Finder"
+      try
+        set currFolder to (folder of the front window as alias)
+      on error
+        set currFolder to (path to home folder as alias)
+      end try
+      POSIX path of currFolder
+    end tell
+    EOT
+    )"
+}
+
+# Used as a drop-in replacement for grep that colors matching lines, but prints all lines
+function highlight() {
+  local args=( "$@" )
+  for (( i=0; i<${#args[@]}; i++ )); do
+    if [ "${args[$i]:0:1}" != "-" ]; then
+      args[$i]="(${args[$i]})|$"
+      break
+    fi
+  done
+  grep --color -E "${args[@]}"
+}
+
+# greps()
+# {
+#    grep -nr "${@}" ` find $SRC/amdlib/ $SRC/ui/ $SRC/build/ $SRC/tests/ -name '*.py' ` | sed -e "s%^[^:]*$SRC/%%"
+# }
+# grepall()
+# {
+#     grep -nr "${@}" $SRC | grep -v \\.svn | grep '\.py:' | sed -e "s%^[^:]*$SRC/%%"
+# }
+
+function localalias() {
+  ipaddr=`dig +short $2`
+  sudo dscl localhost -create /Local/Defaults/Hosts/$1 IPAddress $ipaddr
+  dscacheutil -flushcache
+}
+
+function delalias() {
+  sudo dscl localhost -delete /Local/Default/Hosts/$1
+}
+
+function lsalias() {
+  sudo dscl localhost -list /Local/Default/Hosts IPAddress
+}
+
+function dnsflush() {
+  sudo dscacheutil -flushcache >& /dev/null
+  sudo killall -HUP mDNSResponder >& /dev/null
+  # dnslauncher is what HandsOff uses to wrap dns lookups...
+  sudo killall -HUP dnslauncher >& /dev/null
+}
+
+# Enter a running Docker container.
+function denter() {
+ if [[ ! "$1" ]] ; then
+     echo "You must supply a container ID or name."
+     return 0
+ fi
+
+ docker exec -it $1 bash
+ return 0
+}
+
+# Delete a given line number in the known_hosts file.
+knownrm() {
+ re='^[0-9]+$'
+ if ! [[ $1 =~ $re ]] ; then
+   echo "error: line number missing" >&2;
+ else
+   sed -i '' "$1d" ~/.ssh/known_hosts
+ fi
+}
