@@ -122,3 +122,9 @@ knownrm() {
    sed -i '' "$1d" ~/.ssh/known_hosts
  fi
 }
+
+# Provide current python virtualenv to iterm2
+iterm2_print_user_vars()
+{
+    iterm2_set_user_var python_venv $VIRTUAL_ENV
+}
