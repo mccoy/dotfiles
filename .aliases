@@ -128,3 +128,8 @@ iterm2_print_user_vars()
 {
     iterm2_set_user_var python_venv $VIRTUAL_ENV
 }
+
+# Generate some random bytes (16 for a 128 bit ipsec key, for example)
+rand_bytes() {
+  dd if=/dev/random count=$1 bs=1 | xxd -ps
+}

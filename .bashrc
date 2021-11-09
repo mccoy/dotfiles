@@ -128,6 +128,9 @@ export PROMPT_COMMAND='updatePrompt'
 
 shopt -s checkwinsize
 
+# A fix for M1 macs
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # GNUPG
 #
 export GPG_TTY=$(tty)

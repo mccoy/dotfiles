@@ -42,11 +42,17 @@ export PATH
 # Bash-style time output.
 export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 
+# A fix for M1 macs
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # Include alias file (if present) containing aliases for ssh, etc.
 #if [ -f ~/.aliases ]
 #then
 #  source ~/.aliases
 #fi
+
+# Auros vault
+export VAULT_ADDR='https://vault.auros.be'
 
 # Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
 [ -f ~/.aliases ] && source ~/.aliases
