@@ -21,6 +21,18 @@ alias gp='git pull --rebase'
 alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
+# Kubernetes aliases
+alias k="kubectl"
+alias kcc="kubectl config use-context"
+alias kgc="kubectl config current-context"
+alias kns="kubectl config set-context --current --namespace"
+alias ksn="kubectl config set-context --current --namespace"
+alias kpf="kubectl port-forward"
+alias kc="kubectl config use-context"
+alias kg="kubectl config get-contexts"
+alias h="helm"
+alias s=stern
+
 # Functions
 #
 
