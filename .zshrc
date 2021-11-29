@@ -9,6 +9,9 @@ unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
+# Theme
+ZSH_THEME="candy"
+
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
 
@@ -58,6 +61,9 @@ export VAULT_ADDR='https://vault.auros.be'
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.aliases_local ] && source ~/.aliases_local
 
+# Set homebrew vars
+[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Set eternal history
 export HISTFILE=~/.zsh_history    # set our history file location
 export HISTFILESIZE=1000000000    # max is max of a longint, a billion is good enough
@@ -69,8 +75,14 @@ setopt hist_verify                # show command with history expansion to user 
 setopt hist_find_no_dups          # skip sequential dupes when searching through history
 setopt hist_no_store              # do not store history command
 # History search keys
-bindkey "$key[Up]" history-begining-search-forward
-bindkey "$key[Down]" history-beginning-search-backward
+#bindkey "$key[Up]" history-begining-search-forward
+#bindkey "$key[Down]" history-beginning-search-backward
+#bindkey "$key[Up]" history-substring-search-up
+#bindkey "$key[Down]" history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[OA' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^[OB' history-substring-search-down
 
 # GNUPG
 #
