@@ -1,40 +1,88 @@
-#
-# .zshrc
-#
-# @author Jeff Geerling
-#
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/mccoy/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="candy"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git brew history kubectl history-substring-search pyenv vscode)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
 
 # Colors.
 unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
-# Theme
-ZSH_THEME="candy"
-
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
-
-# Define special keys
-key=(
-    BackSpace  "${terminfo[kbs]}"
-    Home       "${terminfo[khome]}"
-    End        "${terminfo[kend]}"
-    Insert     "${terminfo[kich1]}"
-    Delete     "${terminfo[kdch1]}"
-    Up         "${terminfo[kcuu1]}"
-    Down       "${terminfo[kcud1]}"
-    Left       "${terminfo[kcub1]}"
-    Right      "${terminfo[kcuf1]}"
-    PageUp     "${terminfo[kpp]}"
-    PageDown   "${terminfo[knp]}"
-)
-
-# Nicer prompt.
-export PS1=$'\n'"%F{green} %*%F %3~ %F{white}"$'\n'"$ "
-
-# Enable plugins.
-plugins=(git brew history kubectl history-substring-search pyenv vscode)
 
 # Update path
 typeset -U path			# make path entries unique
@@ -48,16 +96,12 @@ export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
 # A fix for M1 macs
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-# Include alias file (if present) containing aliases for ssh, etc.
-#if [ -f ~/.aliases ]
-#then
-#  source ~/.aliases
-#fi
-
 # Auros vault
 export VAULT_ADDR='https://vault.auros.be'
 
 # Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
+#
+# These are done as .alias files and not .oh-my-zsh/custom is because they are also bash aliaes
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.aliases_local ] && source ~/.aliases_local
 
@@ -74,15 +118,13 @@ setopt hist_ignore_space          # ignore commands that start with space
 setopt hist_verify                # show command with history expansion to user before running it
 setopt hist_find_no_dups          # skip sequential dupes when searching through history
 setopt hist_no_store              # do not store history command
-# History search keys
-#bindkey "$key[Up]" history-begining-search-forward
-#bindkey "$key[Down]" history-beginning-search-backward
-#bindkey "$key[Up]" history-substring-search-up
-#bindkey "$key[Down]" history-substring-search-down
+#Zsh substring history search key bindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[OA' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[OB' history-substring-search-down
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
 
 # GNUPG
 #
@@ -94,6 +136,7 @@ export TERM=xterm-256color
 export LESS="-erX"
 export BLOCKSIZE="1024"
 export LC_ALL="en_US.UTF-8"
+export LANG=en_US.UTF-8
 export RSYNC_RSH=/usr/bin/ssh
 
 # Umask bits.
