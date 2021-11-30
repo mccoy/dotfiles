@@ -60,9 +60,10 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # Colors.
-unset LSCOLORS
+#unset LSCOLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 # Don't require escaping globbing characters in zsh.
 unsetopt nomatch
