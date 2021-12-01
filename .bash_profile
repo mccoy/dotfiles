@@ -1,4 +1,15 @@
 # .bash_profile
+
+# Set basic PATH
+export PATH=/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+
+# Need to set pyenv bits very early
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# next two are handled by the pyenv oh-my-zsh plugin
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
 # Set ssh-agent
 ssh-add -l >/dev/null
 
@@ -24,7 +35,7 @@ if [ $? == 2 ] ; then
    fi
 fi
 
-# Get the aliases and functions
+# Load the rest of the bash environment
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi

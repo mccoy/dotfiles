@@ -5,7 +5,11 @@
 export ZSH="/Users/mccoy/.oh-my-zsh"
 
 # Set name of the theme to load --- see https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="crcandy"
+#ZSH_THEME="crcandy"
+ZSH_THEME="mccoycandy"
+
+# Write perms are fixed but still complains, so disable this check
+ZSH_DISABLE_COMPFIX=true
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,6 +62,9 @@ plugins=(git brew history kubectl history-substring-search pyenv vscode)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Trim path length in prompt
+#PROMPT="%(4~|.../%3~|%~)"
 
 # Colors.
 #unset LSCOLORS
@@ -131,7 +138,8 @@ else
 fi
 
 # Completions.
-autoload -Uz compinit && compinit
+# WARNING: the -u flag turns off legit security warnings too
+autoload -Uz compinit && compinit -u
 # Case insensitive.
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
@@ -154,3 +162,17 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 #}
 #shopt -s extdebug
 #trap prod_command_trap DEBUG
+
+# iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+iterm2_print_user_vars() {
+  # aws profile
+  AWSPROFILE=$(if [[ ! -v $AWS_PROFILE && ! -z $AWS_PROFILE ]];then echo "☁️ $AWS_PROFILE";fi)
+  iterm2_set_user_var awsProfile $AWSPROFILE
+  # kubernetes context
+  KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
+  iterm2_set_user_var kubeContext $KUBECONTEXT
+  iterm2_set_user_var currentPyenv "🐍$(pyenv_prompt_info)"
+}
+
