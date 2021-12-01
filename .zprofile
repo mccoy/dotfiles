@@ -9,8 +9,8 @@ export PATH=/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 # next two are handled by the pyenv oh-my-zsh plugin
-#eval "$(pyenv init --path)"
-#eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
 
 # Set ssh-agent
 ssh-add -l >/dev/null

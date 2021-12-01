@@ -6,7 +6,11 @@ export ZSH="/Users/mccoy/.oh-my-zsh"
 
 # Set name of the theme to load --- see https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="crcandy"
-ZSH_THEME="mccoycandy"
+if [[ $TERM_PROGRAM == 'iTerm.app' ]]; then
+  ZSH_THEME="mccoyminimal"
+else
+  ZSH_THEME="mccoycandy"
+fi
 
 # Write perms are fixed but still complains, so disable this check
 ZSH_DISABLE_COMPFIX=true
@@ -164,6 +168,7 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 #trap prod_command_trap DEBUG
 
 # iTerm2 integration
+ITERM2_SQUELCH_MARK=1
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 iterm2_print_user_vars() {
