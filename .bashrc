@@ -100,7 +100,7 @@ function updatePrompt {
     RESET='\[\e[0m\]'
 
     # Base prompt: \W = working dir
-    PROMPT="[\u@\h:\w]"
+    PROMPT="\u@\h:\w"
 
     # Current Git repo
     if type "__git_ps1" > /dev/null 2>&1; then
@@ -113,7 +113,7 @@ function updatePrompt {
         PROMPT="$PROMPT${RED}{${VIRTUAL_ENV##*/}}${RESET}"
     fi
 
-    PS1="$PROMPT \\$ "
+    PS1="$PROMPT\\$ "
 }
 export -f updatePrompt
 
