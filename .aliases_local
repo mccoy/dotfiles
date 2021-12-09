@@ -1,0 +1,48 @@
+# Local aliases.  Do not link this from dotfiles repo to homedir, just copy
+# the ones that are desired locally and tweak as needed.
+
+EMACSAPP=/Applications/Emacs.app/Contents/MacOS
+# Changing this to favor terminal windows for now
+#if [ -f $EMACSAPP/bin/emacsclient ]; then
+#    export EDITOR="${EMACSAPP}/bin/emacsclient -t -a ${EMACSAPP}/Emacs"
+#    alias et="${EMACSAPP}/bin/emacsclient -t -a ${EMACSAPP}/Emacs"
+#    alias ew="${EMACSAPP}/bin/emacsclient -c -a ${EMACSAPP}/Emacs"
+#    alias e="${EMACSAPP}/bin/emacsclient -n -c -a ${EMACSAPP}/Emacs"
+#
+# The following worked fine but am trying a new osx/emacs setup
+#if [ -f $EMACSAPP/Emacs ]; then
+#    export EDITOR="${EMACSAPP}/Emacs"
+#    alias emacs="${EDITOR} -nw"
+#    alias et="${EDITOR} -nw"
+#    alias ew=${EDITOR}
+#    alias e=${EDITOR}
+#
+if [ -f $EMACSAPP/Emacs ]; then
+    alias emacsclient="${EMACSAPP}/bin/emacsclient"
+    alias et="emacsclient -t -a ~/Applications/emacst"
+    alias emacs="~/Applications/ec"
+    export EDITOR="~/Applications/ec"
+elif [ -f /usr/local/bin/emacs -a /usr/local/bin/emacsclient ]; then
+    export EDITOR="/usr/local/bin/emacsclient -t -a /usr/local/bin/emacs"
+    alias e=${EDITOR}
+    alias et=${EDITOR}
+elif [ -f /usr/bin/emacs -a /usr/bin/emacsclient ]; then
+    export EDITOR="/usr/bin/emacsclient -t -a /usr/bin/emacs"
+    alias e=${EDITOR}
+    alias et=${EDITOR}
+else
+    export EDITOR=vim
+    alias e=${EDITOR}
+    alias et=${EDITOR}
+fi
+
+# Misc aliases
+alias lsd="ls -l | grep ^d"
+alias bookpush="rsync -vaz --del /Volumes/Acyclic/Books/ bombe.mad-scientist.com:/Volumes/Media/Books/"
+alias altbookpush="rsync -vaz --del /Volumes/Acyclic/Books-Alt/ bombe.mad-scientist.com:/Users/mccoy/Documents/Books-Alt/"
+
+# Blog aliases
+alias blogdir="cd /Volumes/Acyclic/Documents/blog"
+alias blogpush="(cd /Volumes/Acyclic/Documents/blog ; rake deploy)"
+alias codedir="cd /Volumes/Acyclic/Documents/code"
+alias erldir="cd /Volumes/Acyclic/Documents/code/erlang"

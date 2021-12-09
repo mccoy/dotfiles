@@ -1,4 +1,4 @@
-# Bash aliases
+# Aliases
 
 alias mosh="perl -E ' print \"\e[?1005h\e[?1002h\" ' && mosh"
 alias sshcheck="openssl s_client -connect"
@@ -33,8 +33,24 @@ alias kg="kubectl config get-contexts"
 alias h="helm"
 alias s=stern
 
+# Python aliases
+alias pip-outdated='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 "LATEST:"'
+alias pip-upgrade-all='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U'
+
+# Ansible aliases
+function ansiblePlaybookDebug {
+    export ANSIBLE_STDOUT_CALLBACK=default
+    echo -n "$@" | grep -q -- "-v" && export ANSIBLE_STDOUT_CALLBACK=yaml
+    'ansible-playbook' "$@"
+}
+alias ansible-playbook='ansiblePlaybookDebug'
+
 # Functions
 #
+
+function cheat() {
+    curl cht.sh/$1
+}
 
 # Dump relevant data about a specific pid
 proc_debug() {
