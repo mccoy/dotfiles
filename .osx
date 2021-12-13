@@ -206,7 +206,7 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 # Bottom right screen corner → Mission Control
 #defaults write com.apple.dock wvous-br-corner -int 2
 #defaults write com.apple.dock wvous-br-modifier -int 0
-# Top left screen corner → Display screen saver
+# Top left screen corner → Disable screen saver
 defaults write com.apple.dock wvous-tl-corner -int 6
 defaults write com.apple.dock wvous-tl-modifier -int 0
 # Bottom left screen corner → Start screen saver
