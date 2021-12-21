@@ -3,12 +3,13 @@
 # Every zsh login shell runs this once
 
 # Set basic PATH
-export PATH=/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+
+# Set homebrew vars
+#[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Need to set pyenv bits very early
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-# next two are handled by the pyenv oh-my-zsh plugin
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 

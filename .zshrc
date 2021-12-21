@@ -101,7 +101,7 @@ export VAULT_ADDR='https://vault.auros.be'
 [ -f ~/.aliases_local ] && source ~/.aliases_local
 
 # Set homebrew vars
-[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+#[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Set eternal history
 export HISTFILE=~/.zsh_history    # set our history file location
