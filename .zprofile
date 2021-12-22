@@ -1,4 +1,4 @@
-# .zshenv
+# .zprofile
 #
 # Every zsh login shell runs this once
 
@@ -6,7 +6,7 @@
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 # Set homebrew vars
-#[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Need to set pyenv bits very early
 export PYENV_ROOT="$HOME/.pyenv"
