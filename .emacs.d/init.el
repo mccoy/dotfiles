@@ -1,4 +1,4 @@
-;;; Emfy 0.2.0 <https://github.com/susam/emfy>
+;;; Based upon Emfy 0.2.0 <https://github.com/susam/emfy>
 
 ;; Customize user interface.
 (menu-bar-mode 0)
@@ -17,6 +17,29 @@
 (set-face-background 'lazy-highlight "#960")
 (set-face-foreground 'lazy-highlight "#ccc")
 (set-face-foreground 'font-lock-comment-face "#fc0")
+
+;; Set frame size when in a windowed environment
+(if (display-graphic-p)
+  (progn
+    (setq initial-frame-alist
+      '(
+         (tool-bar-lines . 0)
+         (width . 120) ; chars
+         (height . 40) ; lines
+         (left . 50)
+         (top . 50)
+         (font . "Inconsolata-g-14")))
+    (setq default-frame-alist
+       '(
+         (tool-bar-lines . 0)
+         (width . 120)
+         (height . 40)
+         (left . 50)
+         (top . 50)
+         (font . "Inconsolata-g-14"))))
+  (progn
+    (setq initial-frame-alist '( (tool-bar-lines . 0)))
+    (setq default-frame-alist '( (tool-bar-lines . 0)))))
 
 ;; Interactively do things.
 (ido-mode 1)
@@ -47,7 +70,7 @@
 (setq show-paren-delay 0)
 (show-paren-mode)
 
-;; Write auto-saves and backups to separate directory.
+;; Write auto-saves and backups to separate directory.p
 (make-directory "~/.tmp/emacs/auto-save/" t)
 (setq auto-save-file-name-transforms '((".*" "~/.tmp/emacs/auto-save/" t)))
 (setq backup-directory-alist '(("." . "~/.tmp/emacs/backup/")))
