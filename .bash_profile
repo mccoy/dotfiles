@@ -12,6 +12,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
 
+# Set gopath
+export GOPATH=$HOME/go
+
 # Set ssh-agent
 ssh-add -l >/dev/null
 

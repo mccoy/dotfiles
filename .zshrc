@@ -1,6 +1,9 @@
 # PATH should have been set in .zshenv
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Setting GOPATH so that zsh plugin picks it up
+export GOPATH=$HOME/go
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/mccoy/.oh-my-zsh"
 
@@ -61,7 +64,7 @@ ZSH_DISABLE_COMPFIX=true
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git brew history kubectl history-substring-search pyenv vscode)
+plugins=(git brew history kubectl history-substring-search pyenv vscode golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,7 +84,7 @@ unsetopt nomatch
 
 # Update path
 typeset -U path			# make path entries unique
-path+=(~/bin ~/go/bin)		# append paths
+path+=(~/bin $GOPATH/bin)	# append paths
 #path=('~/bin' $path)		# prepend path element
 export PATH
 

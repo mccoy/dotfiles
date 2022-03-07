@@ -10,6 +10,9 @@ alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.
 alias lsd="ls -l | grep ^d"
 alias update_all="brew update; brew upgrade; brew cleanup -s; brew doctor; brew missing; brew cu -a; echo 'Outdated packages to update using mas upgrade:'; mas outdated"
 
+# History aliaes/functions
+hgrep () { fc -Dlim "*$@*" 1 }
+
 # Vault aliases (auros)
 vl='vault login -method=oidc'
 vle='vault login -method=oidc role=exchanges'
