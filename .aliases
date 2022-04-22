@@ -24,8 +24,12 @@ alias gp='git pull --rebase'
 alias gcam='git commit -am'
 alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
 
+# Docker aliases
+alias lzd='lazydocker'
+
 # Kubernetes aliases
 alias k="kubectl"
+alias k8="kubectl"
 alias kcc="kubectl config use-context"
 alias kgc="kubectl config current-context"
 alias kns="kubectl config set-context --current --namespace"
@@ -33,6 +37,8 @@ alias ksn="kubectl config set-context --current --namespace"
 alias kpf="kubectl port-forward"
 alias kc="kubectl config use-context"
 alias kg="kubectl config get-contexts"
+alias kx='f() { [ "$1" ] && kubectl config use-context $1 || kubectl config current-context ; } ; f'
+alias kn='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
 alias h="helm"
 alias s=stern
 
