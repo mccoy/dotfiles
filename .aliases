@@ -27,7 +27,7 @@ alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %
 # Docker aliases
 alias lzd='lazydocker'
 
-# Kubernetes aliases
+# Kubernetes aliases (in addition to those from oh-my-zsh kubectl plugin)
 alias k="kubectl"
 alias k8="kubectl"
 alias kcc="kubectl config use-context"

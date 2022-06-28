@@ -1,6 +1,9 @@
 # PATH should have been set in .zshenv
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# XXX: THIS IS A HACK
+export PATH="/opt/homebrew/opt/kubernetes-cli@1.22/bin:$PATH"
+
 # Setting GOPATH so that zsh plugin picks it up
 export GOPATH=$HOME/go
 
@@ -64,7 +67,7 @@ ZSH_DISABLE_COMPFIX=true
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git brew history kubectl history-substring-search pyenv vscode golang)
+plugins=(git brew history kubectl history-substring-search pyenv terraform vscode golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,8 +103,12 @@ export VAULT_ADDR='https://vault.auros.be'
 # Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
 #
 # These are done as .alias files and not .oh-my-zsh/custom is because they are also bash aliaes
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.aliases_local ] && source ~/.aliases_local
+if [ -f $HOME/.aliases ]; then
+   source ~/.aliases
+fi
+if [ -f $HOME/.aliases_local ]; then
+  source ~/.aliases_local
+fi
 
 # Set homebrew vars
 #[ -f /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
