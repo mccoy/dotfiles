@@ -123,6 +123,7 @@ setopt hist_ignore_space          # ignore commands that start with space
 setopt hist_verify                # show command with history expansion to user before running it
 setopt hist_find_no_dups          # skip sequential dupes when searching through history
 setopt hist_no_store              # do not store history command
+setopt share_history              # prevent parallel shells stomping each other
 #Zsh substring history search key bindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[OA' history-substring-search-up

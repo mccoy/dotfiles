@@ -13,14 +13,17 @@ alias du_root='for i in /*; do if ! mountpoint -q "$i"; then du -sh $i; fi; done
 
 # History aliaes/functions
 hgrep () { fc -Dlim "*$@*" 1 }
+alias hist="history 1"
 
 # Vault aliases (auros)
 vl='vault login -method=oidc'
 vle='vault login -method=oidc role=exchanges'
 
 # pls aliases (auros)
-alias po='pls -x 6 -a operational -r 90_superuser -p operational --'
-alias pl='pls -x 6 -a legacy -r 90_superuser -p ktx --'
+alias pop="pls -x 8 -a operational -r 90_superuser -p operational --"
+alias pops="pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser -p operational --"
+alias ple="pls -x 8 -a legacy -r 90_superuser -p ktx --"
+alias ples="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser -p ktx --"
 
 # Git aliases.
 alias gs='git status'
