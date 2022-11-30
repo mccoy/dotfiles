@@ -104,10 +104,10 @@ export VAULT_ADDR='https://vault.auros.be'
 #
 # These are done as .alias files and not .oh-my-zsh/custom is because they are also bash aliaes
 if [ -f $HOME/.aliases ]; then
-   source ~/.aliases
+   source $HOME/.aliases
 fi
 if [ -f $HOME/.aliases_local ]; then
-  source ~/.aliases_local
+  source $HOME/aliases_local
 fi
 
 # Set homebrew vars
