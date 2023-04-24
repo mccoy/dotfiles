@@ -103,11 +103,11 @@ export VAULT_ADDR='https://vault.auros.be'
 # Aliases (the _local are for aliase local to this machine and not in my dotfiles repo)
 #
 # These are done as .alias files and not .oh-my-zsh/custom is because they are also bash aliaes
-if [ -f $HOME/.aliases ]; then
-   source $HOME/.aliases
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
 fi
-if [ -f $HOME/.aliases_local ]; then
-  source $HOME/aliases_local
+if [ -f ~/.aliases_local ]; then
+  source ~/.aliases_local
 fi
 
 # Set homebrew vars
@@ -192,3 +192,7 @@ iterm2_print_user_vars() {
   iterm2_set_user_var currentPyenv "🐍$(pyenv_prompt_info)"
 }
 
+# OrbStack command-line tools and integration
+if [ -f ~/.orbstack/shell/init.zsh ]; then
+  source ~/.orbstack/shell/init.zsh 2>/dev/null
+fi
