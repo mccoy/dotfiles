@@ -2,13 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # XXX: THIS IS A HACK
-export PATH="/opt/homebrew/opt/kubernetes-cli@1.22/bin:$PATH"
+if [[ -f "/opt/homebrew/opt/kubernetes-cli@1.22" ]]; then
+  export PATH="/opt/homebrew/opt/kubernetes-cli@1.22/bin:$PATH"
+fi
 
 # Setting GOPATH so that zsh plugin picks it up
 export GOPATH=$HOME/go
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/mccoy/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- see https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="crcandy"
@@ -180,19 +182,23 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 # iTerm2 integration
 ITERM2_SQUELCH_MARK=1
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [[ -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+  source "${HOME}/.iterm2_shell_integration.zsh"
 
-iterm2_print_user_vars() {
-  # aws profile
-  AWSPROFILE=$(if [[ ! -v $AWS_PROFILE && ! -z $AWS_PROFILE ]];then echo "☁️ $AWS_PROFILE";fi)
-  iterm2_set_user_var awsProfile $AWSPROFILE
-  # kubernetes context
-  KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
-  iterm2_set_user_var kubeContext $KUBECONTEXT
-  iterm2_set_user_var currentPyenv "🐍$(pyenv_prompt_info)"
-}
+  iterm2_print_user_vars() {
+    # aws profile
+    AWSPROFILE=$(if [[ ! -v $AWS_PROFILE && ! -z $AWS_PROFILE ]];then echo "☁️ $AWS_PROFILE";fi)
+    iterm2_set_user_var awsProfile $AWSPROFILE
+    # kubernetes context
+    KUBECONTEXT=$(CTX=$(kubectl config current-context) 2> /dev/null;if [ $? -eq 0 ]; then echo $CTX;fi)
+    iterm2_set_user_var kubeContext $KUBECONTEXT
+    iterm2_set_user_var currentPyenv "🐍$(pyenv_prompt_info)"
+  }
+else
+  iterm2_prompt_mark() {}
+fi
 
 # OrbStack command-line tools and integration
-if [ -f ~/.orbstack/shell/init.zsh ]; then
-  source ~/.orbstack/shell/init.zsh 2>/dev/null
+if [ -f ${HOME}/.orbstack/shell/init.zsh ]; then
+  source ${HOME}/.orbstack/shell/init.zsh 2>/dev/null
 fi
