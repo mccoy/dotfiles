@@ -202,3 +202,7 @@ fi
 if [ -f ${HOME}/.orbstack/shell/init.zsh ]; then
   source ${HOME}/.orbstack/shell/init.zsh 2>/dev/null
 fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
