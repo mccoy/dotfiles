@@ -8,8 +8,13 @@ alias rgrep="grep -R"
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias lsd="ls -l | grep ^d"
-alias update_all="brew update; brew upgrade; brew cleanup -s; brew doctor; brew missing; brew cu -a; echo 'Outdated packages to update using mas upgrade:'; mas outdated"
 alias du_root='for i in /*; do if ! mountpoint -q "$i"; then du -sh $i; fi; done;'
+
+# Homebrew aliases
+alias brew-depends-list='brew leaves | xargs brew deps --formula --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"'
+alias brew-dependants='brew deps --tree --installed'
+alias brew-depends='brew deps --include-build --tree $(brew leaves)'
+alias brew-update-all="brew update; brew upgrade; brew cleanup -s; brew doctor; brew missing; brew cu -a; echo 'Outdated packages to update using mas upgrade:'; mas outdated"
 
 # History aliaes/functions
 hgrep () { fc -Dlim "*$@*" 1 }
@@ -53,6 +58,9 @@ alias s=stern
 # Python aliases
 alias pip-outdated='pip3 freeze | cut -d = -f 1 | xargs -n 1 pip3 search | grep -B2 "LATEST:"'
 alias pip-upgrade-all='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs pip3 install -U'
+
+# GPG/Yubikey aliases
+alias yubi-reset='gpg-connect-agent "scd serialno" "learn --force" /bye'
 
 # Ansible aliases
 function ansiblePlaybookDebug {

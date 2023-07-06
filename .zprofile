@@ -38,3 +38,6 @@ ssh-add -l >/dev/null
 #      echo "NOTE: New agent started, you should add your keys with 'ssh-add'!"
 #   fi
 #fi
+
+# Added by OrbStack: command-line tools and integration
+[ -f ~/.orbstack/shell/init.zsh ] && source ~/.orbstack/shell/init.zsh 2>/dev/null

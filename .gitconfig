@@ -4,6 +4,8 @@
 # "git config --global <attr> <value>" cli command instead of hard-coding here.
 [user]
 	name = Jim McCoy
+	signingkey = FA0C4352D2BA8CB2!
+	email = jim.mccoy@auros.global
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	mylog = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -16,3 +18,7 @@
 	rebase = false
 [core]
 	excludesfile = /Users/mccoy/.gitignore_global
+[commit]
+	gpgsign = true
+[log]
+	showSignature = true
