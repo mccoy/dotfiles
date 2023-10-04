@@ -147,6 +147,11 @@ export LC_ALL="en_US.UTF-8"
 export LANG=en_US.UTF-8
 export RSYNC_RSH=/usr/bin/ssh
 
+# Terraform shared plugin dir
+if [ -e "${HOME}/.terraform.d/plugins" ]; then
+  TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugins"
+fi
+
 # Umask bits.
 if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
   umask 002
