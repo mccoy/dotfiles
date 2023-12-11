@@ -8,3 +8,6 @@ customizations.
 The zsh files are the ones I am maintaining at the moment, but I try
 to back-port as much as I can into the bash dotfiles to keep
 them in sync.
+
+Standard usage is to checkout the repo into a local dir and then
+symlink to the actual dotfiles in the homedir.

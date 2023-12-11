@@ -152,12 +152,21 @@ if [ -e "${HOME}/.terraform.d/plugins" ]; then
   TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugins"
 fi
 
+# gitlab token for tf and gitlab api usage
+if [ -f ~/.gitlab_token ]; then
+  export GITLAB_TOKEN=`cat < ~/.gitlab_token`
+fi
+
 # Umask bits.
 if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
   umask 002
 else
   umask 022
 fi
+
+# ulimit bits
+ulimit -Sn 4096      # Increase open files.
+ulimit -Sl unlimited # Increase max locked memory.
 
 # Completions.
 # WARNING: the -u flag turns off legit security warnings too

@@ -29,6 +29,7 @@ alias pop="pls -x 8 -a operational -r 90_superuser -p operational --"
 alias pops="pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser -p operational --"
 alias ple="pls -x 8 -a legacy -r 90_superuser -p ktx --"
 alias ples="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser -p ktx --"
+alias plespops="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser -p ktx -- pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser -p operational --"
 
 # Git aliases.
 alias gs='git status'
