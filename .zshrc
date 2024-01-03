@@ -69,7 +69,11 @@ ZSH_DISABLE_COMPFIX=true
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(git brew history kubectl history-substring-search pyenv terraform vscode golang)
+if command -v pyenv 1>/dev/null 2>&1; then
+  plugins=(git brew history kubectl history-substring-search pyenv terraform vscode golang)
+else
+  plugins=(git brew history kubectl history-substring-search terraform vscode golang)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
