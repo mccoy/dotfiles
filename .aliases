@@ -9,6 +9,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
 alias lsd="ls -l | grep ^d"
 alias du_root='for i in /*; do if ! mountpoint -q "$i"; then du -sh $i; fi; done;'
+alias decolorize='sed -r "s/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"'
 
 # Homebrew aliases
 alias brew-depends-list='brew leaves | xargs brew deps --formula --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"'
@@ -26,10 +27,10 @@ vle='vault login -method=oidc role=exchanges'
 
 # pls aliases (auros)
 alias pop="pls -x 8 -a operational -r 90_superuser -p operational --"
-alias pops="pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser -p operational --"
+alias pops="pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser-assumed -p operational --"
 alias ple="pls -x 8 -a legacy -r 90_superuser -p ktx --"
-alias ples="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser -p ktx --"
-alias plespops="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser -p ktx -- pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser -p operational --"
+alias ples="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser-assumed -p ktx --"
+alias plespops="pls --revoke-iam -x 8 -a legacy -r 99_sensitive_superuser-assumed -p ktx -- pls --revoke-iam -x 8 -a operational -r 99_sensitive_superuser-assumed -p operational --"
 
 # Git aliases.
 alias gs='git status'
@@ -190,4 +191,32 @@ iterm2_print_user_vars()
 # Generate some random bytes (16 for a 128 bit ipsec key, for example)
 rand_bytes() {
   dd if=/dev/random count=$1 bs=1 | xxd -ps
+}
+
+# DNS-over-HTTPS query function
+function doh() {
+ if [[ $# -lt 1 ]] ; then
+   echo "Usage: doh name <rec_type> <doh_server>"
+   return 0
+ fi
+
+ NAME=$1
+ if [[ $# -gt 1 ]] ; then
+   TYPE=$2
+ else
+   TYPE='A'
+ fi
+ if [[ $# -gt 2 ]] ; then
+   SERVICE=$3
+ else
+   SERVICE='cloudflare'
+ fi
+
+ if [[ $SERVICE == 'google' ]] ; then
+   URL="https://dns.google/resolve?name=$NAME&type=$TYPE"
+ else
+   URL="https://cloudflare-dns.com/dns-query?name=$NAME&type=$TYPE"
+ fi
+
+ curl --header 'Accept: application/dns-json' --silent $URL | jq -r 
 }
