@@ -67,6 +67,10 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Set background to dark-grey color
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Solid Colors/Stone.png"'
 
+# Change spacing in the menu bar (https://news.ycombinator.com/item?id=40606219)
+defaults -currentHost write -globalDomain NSStatusItemSpacing -int 4
+defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 4
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################

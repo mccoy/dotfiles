@@ -22,3 +22,5 @@
 	gpgsign = true
 [log]
 	showSignature = true
+[push]
+	autoSetupRemote = true
